@@ -2,32 +2,38 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Tej Jolly – Engineering Portfolio</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Portfolio of Tej Jolly – mechanical engineer working at the intersection of CFD, biomechanics, and machine learning." />
+  <title>Tej Jolly – Engineering Portfolio</title>
+  <meta name="description" content="Tej Jolly – mechanical engineer specializing in CFD of environmental and cardiovascular flows." />
 
   <style>
     :root{
       --bg:#f8f7f9;
-      --bg-alt:#ffffff;
-      --accent:#a50021;
-      --accent-soft:#fdebed;
-      --text:#222222;
-      --muted:#666666;
-      --border:#dddddd;
-      --shadow:0 10px 26px rgba(0,0,0,0.07);
+      --bg2:#ffffff;
+      --text:#171717;
+      --muted:#5f6368;
+      --border:#e3e3e3;
+      --shadow:0 10px 24px rgba(0,0,0,0.08);
       --radius:18px;
-      --max-width:1320px; /* wider to support recruiter-style scanning */
-      --focus:0 0 0 3px rgba(165,0,33,0.18);
+
+      --accent:#a50021;
+      --accent2:#7f0019;
+      --accentSoft:#fdebed;
+
+      --max:1320px;
+      --pad:1.25rem;
     }
 
     *{ box-sizing:border-box; }
     html{ scroll-behavior:smooth; }
     body{
       margin:0;
-      font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-      background:var(--bg);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       color:var(--text);
+      background:
+        radial-gradient(1200px 800px at 10% -10%, rgba(165,0,33,0.10), transparent 60%),
+        radial-gradient(900px 600px at 90% 0%, rgba(165,0,33,0.06), transparent 55%),
+        var(--bg);
       line-height:1.6;
     }
 
@@ -36,707 +42,611 @@
 
     /* Accessibility */
     .skip-link{
-      position:absolute;
-      left:-999px;
-      top:auto;
-      width:1px;
-      height:1px;
-      overflow:hidden;
+      position:absolute; left:-999px; top:auto; width:1px; height:1px; overflow:hidden;
     }
     .skip-link:focus{
-      left:1rem;
-      top:1rem;
-      width:auto;
-      height:auto;
-      padding:0.6rem 0.9rem;
-      background:var(--bg-alt);
-      border:1px solid var(--border);
-      border-radius:999px;
+      left:1rem; top:1rem; width:auto; height:auto; padding:.6rem .9rem;
+      background:var(--bg2); border:1px solid var(--border); border-radius:999px;
       box-shadow:var(--shadow);
-      z-index:999;
-      outline:none;
+      z-index:9999;
     }
 
+    /* Header / Nav */
     header{
-      background:var(--bg-alt);
-      border-bottom:1px solid var(--border);
       position:sticky;
       top:0;
-      z-index:20;
+      z-index:50;
+      backdrop-filter:saturate(160%) blur(10px);
+      background:rgba(255,255,255,0.78);
+      border-bottom:1px solid rgba(227,227,227,0.8);
     }
     .nav-inner{
-      max-width:var(--max-width);
+      max-width:var(--max);
       margin:0 auto;
-      padding:0.85rem 1.25rem;
+      padding:.75rem var(--pad);
       display:flex;
       align-items:center;
       justify-content:space-between;
       gap:1rem;
     }
     .brand{
+      display:flex;
+      align-items:baseline;
+      gap:.7rem;
       font-weight:800;
-      letter-spacing:0.04em;
-      font-size:0.95rem;
-      text-transform:uppercase;
-      color:var(--accent);
+      letter-spacing:.02em;
       white-space:nowrap;
     }
+    .brand .name{
+      color:var(--accent);
+      text-transform:uppercase;
+      font-size:.95rem;
+      letter-spacing:.08em;
+    }
+    .brand .role{
+      font-weight:600;
+      color:var(--muted);
+      font-size:.92rem;
+    }
+
     nav ul{
       list-style:none;
       display:flex;
-      gap:0.4rem;
+      gap:.5rem;
       margin:0;
       padding:0;
       flex-wrap:wrap;
-      font-size:0.92rem;
+      justify-content:flex-end;
     }
     nav a{
       display:inline-flex;
       align-items:center;
-      gap:0.45rem;
-      padding:0.35rem 0.7rem;
+      padding:.45rem .8rem;
       border-radius:999px;
+      font-size:.9rem;
+      color:var(--text);
       border:1px solid transparent;
-      transition:background 0.12s ease, border-color 0.12s ease;
+      transition:background .12s ease, border-color .12s ease, transform .04s ease;
     }
     nav a:hover{
-      background:var(--accent-soft);
+      background:var(--accentSoft);
+      border-color:#f3cbd3;
       text-decoration:none;
+      transform:translateY(-1px);
     }
     nav a.active{
-      background:var(--accent-soft);
-      border-color:rgba(165,0,33,0.25);
-      font-weight:650;
+      background:var(--accent);
+      color:#fff;
+      border-color:var(--accent);
+      box-shadow:0 8px 18px rgba(165,0,33,0.18);
     }
-    nav a:focus{ outline:none; box-shadow:var(--focus); }
 
     main{
-      max-width:var(--max-width);
+      max-width:var(--max);
       margin:0 auto;
-      padding:1.5rem 1.25rem 3.25rem;
+      padding:1.25rem var(--pad) 4rem;
     }
 
-    /* Hero / Executive Summary layout (Option A) */
-    .hero{
+    /* Layout */
+    .hero-grid{
       display:grid;
-      grid-template-columns:minmax(0, 3.1fr) minmax(0, 1.9fr);
-      gap:1.6rem;
+      grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr);
+      gap:1.5rem;
       align-items:start;
-      margin-top:1.1rem;
-      margin-bottom:2.2rem;
+      margin-top:1.25rem;
     }
+
+    .card{
+      background:rgba(255,255,255,0.92);
+      border:1px solid rgba(227,227,227,0.9);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+    .card-inner{ padding:1.25rem 1.35rem; }
+
     .hero h1{
-      margin:0 0 0.5rem;
-      font-size:clamp(1.75rem, 1.4rem + 1vw, 2.25rem);
+      margin:.15rem 0 .6rem;
+      font-size:2.05rem;
       line-height:1.15;
-      letter-spacing:-0.015em;
+      letter-spacing:-0.02em;
     }
-    .lead{
-      margin:0 0 1.1rem;
+    .hero .lead{
+      margin:0 0 1rem;
       color:var(--muted);
-      font-size:1.05rem;
-      max-width:58ch;
-    }
-    .hero-tags{
-      display:flex;
-      flex-wrap:wrap;
-      gap:0.5rem;
-      margin:0.7rem 0 1.2rem;
-    }
-    .tag{
-      font-size:0.75rem;
-      padding:0.18rem 0.7rem;
-      border-radius:999px;
-      border:1px solid var(--border);
-      background:var(--bg-alt);
-      color:var(--muted);
-      text-transform:uppercase;
-      letter-spacing:0.06em;
-      white-space:nowrap;
+      font-size:1.03rem;
+      max-width:60ch;
     }
 
-    .hero-actions{
+    .quicklinks{
       display:flex;
+      align-items:center;
       flex-wrap:wrap;
-      gap:0.75rem;
-      margin-top:0.75rem;
+      gap:.65rem;
+      margin-top:1rem;
     }
-
+    .quicklinks .label{
+      font-size:.9rem;
+      color:var(--muted);
+      font-weight:600;
+    }
     .btn{
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      padding:0.62rem 1.1rem;
+      gap:.45rem;
+      padding:.65rem 1.05rem;
       border-radius:999px;
-      font-size:0.92rem;
-      font-weight:600;
       border:1px solid transparent;
       cursor:pointer;
-      transition:transform 0.05s ease, box-shadow 0.08s ease, background 0.1s ease;
-      user-select:none;
+      font-size:.92rem;
+      font-weight:600;
+      transition:transform .05s ease, box-shadow .12s ease, background .12s ease;
+      white-space:nowrap;
     }
     .btn-primary{
       background:var(--accent);
       color:#fff;
-      box-shadow:var(--shadow);
+      box-shadow:0 10px 22px rgba(165,0,33,0.16);
     }
     .btn-primary:hover{
+      background:var(--accent2);
+      text-decoration:none;
       transform:translateY(-1px);
-      box-shadow:0 12px 30px rgba(0,0,0,0.12);
-      text-decoration:none;
-    }
-    .btn-ghost{
-      background:transparent;
-      color:var(--accent);
-      border-color:rgba(165,0,33,0.18);
-    }
-    .btn-ghost:hover{
-      background:var(--accent-soft);
-      text-decoration:none;
-    }
-    .btn:focus{ outline:none; box-shadow:var(--focus); }
-
-    .card{
-      background:var(--bg-alt);
-      border-radius:var(--radius);
-      border:1px solid var(--border);
-      box-shadow:var(--shadow);
+      box-shadow:0 14px 28px rgba(165,0,33,0.22);
     }
 
-    .about-card{
-      padding:1.25rem 1.35rem;
-    }
-    .about-card h2{
-      margin:0 0 0.5rem;
-      font-size:1.1rem;
-      letter-spacing:-0.01em;
-    }
-    .about-card p{
-      margin:0.65rem 0 0;
-      color:var(--muted);
-      font-size:0.95rem;
-    }
-
-    .exec-card{
-      padding:1.1rem 1.15rem;
-      position:sticky;
-      top:84px; /* below sticky nav */
-      align-self:start;
-    }
-    .exec-card h2{
-      margin:0 0 0.6rem;
-      font-size:1.0rem;
-      letter-spacing:-0.01em;
-    }
-    .exec-grid{
+    .meta-grid{
       display:grid;
-      gap:0.85rem;
-      margin-top:0.5rem;
+      grid-template-columns:1fr;
+      gap:1rem;
     }
-    .exec-block{
-      border:1px solid var(--border);
-      border-radius:14px;
-      padding:0.85rem 0.9rem;
-      background:linear-gradient(180deg, rgba(253,235,237,0.35), rgba(255,255,255,0.75));
+    .meta-block h3{
+      margin:.15rem 0 .55rem;
+      font-size:1.02rem;
+      letter-spacing:-0.01em;
     }
-    .exec-block h3{
-      margin:0 0 0.35rem;
-      font-size:0.86rem;
-      text-transform:uppercase;
-      letter-spacing:0.08em;
+    .meta-block p{
+      margin:.4rem 0 0;
       color:var(--muted);
+      font-size:.92rem;
     }
-    .exec-block ul{
-      margin:0.35rem 0 0;
-      padding-left:1.1rem;
-      color:var(--text);
-      font-size:0.92rem;
+    .meta-list{
+      margin:.25rem 0 0 1.05rem;
+      padding:0;
+      color:var(--muted);
+      font-size:.92rem;
     }
-    .exec-links{
+    .meta-list li{ margin:.25rem 0; }
+
+    .pill-row{
       display:flex;
       flex-wrap:wrap;
-      gap:0.55rem;
-      margin-top:0.2rem;
+      gap:.45rem;
+      margin-top:.65rem;
+    }
+    .pill{
+      font-size:.78rem;
+      padding:.2rem .6rem;
+      border-radius:999px;
+      border:1px solid #efc2cb;
+      background:rgba(253,235,237,0.6);
+      color:#7b0b20;
+      letter-spacing:.02em;
+      font-weight:650;
     }
 
-    section{ margin-top:2.6rem; }
+    /* Sections */
+    section{ margin-top:2.25rem; }
     section h2{
-      font-size:1.5rem;
-      margin:0 0 0.55rem;
+      margin:0 0 .35rem;
+      font-size:1.45rem;
       letter-spacing:-0.01em;
     }
     .section-intro{
-      margin:0;
+      margin:.2rem 0 0;
       color:var(--muted);
-      font-size:0.97rem;
       max-width:70ch;
     }
 
-    /* Projects: Option A cards + accordion drawers */
-    .project-grid{
+    /* Projects */
+    .projects-grid{
       display:grid;
-      grid-template-columns:repeat(auto-fit, minmax(320px, 1fr));
-      gap:1.3rem;
-      margin-top:1.2rem;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap:1.25rem;
+      margin-top:1.25rem;
     }
-    .project-card{
-      padding:1.05rem 1.1rem 1.0rem;
-      overflow:hidden;
-      position:relative;
+    .project-card .top{
+      padding:1.1rem 1.2rem .9rem;
+      border-bottom:1px solid rgba(227,227,227,0.8);
+      background:
+        linear-gradient(135deg, rgba(165,0,33,0.08), transparent 55%),
+        rgba(255,255,255,0.88);
     }
-    .project-top{
-      display:flex;
-      flex-direction:column;
-      gap:0.55rem;
-    }
-    .project-label{
-      font-size:0.75rem;
+    .project-kicker{
+      font-size:.78rem;
       text-transform:uppercase;
-      letter-spacing:0.08em;
-      color:var(--muted);
+      letter-spacing:.09em;
+      color:#7a7a7a;
+      font-weight:750;
     }
     .project-card h3{
-      margin:0;
+      margin:.35rem 0 .25rem;
       font-size:1.12rem;
-      line-height:1.25;
+      letter-spacing:-0.01em;
     }
     .project-meta{
-      font-size:0.86rem;
       color:var(--muted);
+      font-size:.9rem;
+      margin:0;
     }
 
     figure{
-      margin:0.75rem 0 0.45rem;
+      margin:0;
+      padding:0;
     }
     figure img{
       width:100%;
-      height:auto;
       display:block;
       border-radius:14px;
-      border:1px solid rgba(0,0,0,0.06);
+      border:1px solid rgba(227,227,227,0.85);
       background:#fff;
     }
     figcaption{
-      margin-top:0.4rem;
-      font-size:0.82rem;
+      margin:.5rem 0 0;
       color:var(--muted);
+      font-size:.86rem;
+      line-height:1.35;
     }
 
-    .objective{
-      margin:0.35rem 0 0;
-      font-size:0.93rem;
-      color:var(--text);
-    }
-    .objective strong{ font-weight:750; }
-
-    .chips{
+    .project-body{ padding:1rem 1.2rem 1.15rem; }
+    .asset-links{
       display:flex;
       flex-wrap:wrap;
-      gap:0.45rem;
-      margin-top:0.55rem;
+      gap:.6rem;
+      margin:.75rem 0 .6rem;
     }
-    .chip{
-      font-size:0.78rem;
-      padding:0.18rem 0.6rem;
-      border-radius:999px;
-      border:1px solid var(--border);
-      background:rgba(255,255,255,0.75);
-      color:var(--muted);
-      white-space:nowrap;
-    }
-
-    .project-actions{
-      display:flex;
-      flex-wrap:wrap;
-      gap:0.6rem;
-      margin-top:0.75rem;
-    }
-
-    details.drawer{
-      margin-top:0.8rem;
-      border-top:1px solid rgba(0,0,0,0.06);
-      padding-top:0.75rem;
-    }
-    details.drawer > summary{
-      list-style:none;
-      cursor:pointer;
-      display:flex;
+    .asset-links a{
+      display:inline-flex;
       align-items:center;
-      justify-content:space-between;
-      gap:1rem;
-      font-weight:650;
-      padding:0.55rem 0.2rem;
-      border-radius:12px;
-    }
-    details.drawer > summary::-webkit-details-marker{ display:none; }
-    details.drawer > summary:hover{
+      gap:.4rem;
+      padding:.5rem .85rem;
+      border-radius:999px;
+      border:1px solid #efc2cb;
       background:rgba(253,235,237,0.55);
+      color:#7b0b20;
+      font-weight:700;
+      font-size:.88rem;
+      text-decoration:none;
+      transition:transform .05s ease, background .12s ease;
     }
-    details.drawer[open] > summary{
-      background:rgba(253,235,237,0.55);
-    }
-    .caret{
-      width:10px;
-      height:10px;
-      border-right:2px solid var(--muted);
-      border-bottom:2px solid var(--muted);
-      transform:rotate(-45deg);
-      transition:transform 0.12s ease;
-      margin-right:0.2rem;
-      flex:0 0 auto;
-    }
-    details.drawer[open] .caret{
-      transform:rotate(45deg);
+    .asset-links a:hover{
+      transform:translateY(-1px);
+      background:rgba(253,235,237,0.85);
     }
 
-    .drawer-body{
-      padding:0.15rem 0.2rem 0.35rem;
+    .project-description{
+      margin:.55rem 0 0;
+      font-size:.95rem;
       color:var(--text);
-    }
-    .drawer-body h4{
-      margin:0.9rem 0 0.35rem;
-      font-size:0.92rem;
-      text-transform:uppercase;
-      letter-spacing:0.08em;
-      color:var(--muted);
-    }
-    .drawer-body p{
-      margin:0.35rem 0 0;
-      font-size:0.93rem;
-      color:var(--text);
-    }
-    .drawer-body ul{
-      margin:0.35rem 0 0;
-      padding-left:1.1rem;
-      color:var(--text);
-      font-size:0.93rem;
     }
     .skills-line{
-      margin-top:0.65rem;
-      font-size:0.88rem;
+      margin:.7rem 0 0;
       color:var(--muted);
+      font-size:.9rem;
     }
 
-    /* Resume section */
-    .resume-wrap{
-      display:grid;
-      grid-template-columns:minmax(0, 1.6fr) minmax(0, 1fr);
-      gap:1.2rem;
-      margin-top:1.1rem;
-    }
-    .resume-card{
-      padding:1.15rem 1.25rem;
-    }
-    .resume-card h3{
-      margin:0 0 0.35rem;
-      font-size:1.05rem;
-    }
-    .resume-card p{
-      margin:0.35rem 0 0;
-      color:var(--muted);
-      font-size:0.93rem;
-    }
-    .ats-card{
-      padding:1.15rem 1.25rem;
-    }
-    .ats-card h3{
-      margin:0 0 0.65rem;
-      font-size:1.05rem;
-    }
-    .ats-grid{
-      display:grid;
-      gap:0.9rem;
-    }
-    .ats-section{
-      border:1px solid var(--border);
+    details{
+      margin-top:.9rem;
+      border:1px solid rgba(227,227,227,0.95);
       border-radius:14px;
-      padding:0.85rem 0.95rem;
-      background:#fff;
+      background:rgba(255,255,255,0.85);
+      overflow:hidden;
     }
-    .ats-section h4{
-      margin:0 0 0.35rem;
-      font-size:0.9rem;
-      text-transform:uppercase;
-      letter-spacing:0.08em;
-      color:var(--muted);
-    }
-    .ats-section ul{
-      margin:0.25rem 0 0;
-      padding-left:1.1rem;
-      font-size:0.93rem;
-    }
-
-    footer{
-      margin-top:3rem;
-      padding-top:1.2rem;
-      border-top:1px solid var(--border);
-      color:var(--muted);
-      font-size:0.9rem;
-    }
-    .footer-inner{
+    summary{
+      cursor:pointer;
+      padding:.75rem .95rem;
+      font-weight:800;
+      color:#3a3a3a;
       display:flex;
-      flex-wrap:wrap;
       align-items:center;
       justify-content:space-between;
-      gap:0.75rem;
+      list-style:none;
+    }
+    summary::-webkit-details-marker{ display:none; }
+    details[open] summary{
+      background:rgba(253,235,237,0.75);
+      border-bottom:1px solid rgba(227,227,227,0.9);
+    }
+    .details-inner{
+      padding:.85rem .95rem .95rem;
+      color:var(--muted);
+      font-size:.92rem;
+    }
+    .details-inner h4{
+      margin:.65rem 0 .15rem;
+      color:#2b2b2b;
+      font-size:.98rem;
+      letter-spacing:-0.01em;
+    }
+    .details-inner p{ margin:.25rem 0; }
+
+    /* Resume */
+    .resume-box{
+      max-width:720px;
     }
 
-    @media (max-width: 980px){
-      .hero{ grid-template-columns:1fr; }
-      .exec-card{ position:static; top:auto; }
-      .resume-wrap{ grid-template-columns:1fr; }
+    /* Footer */
+    footer{
+      margin-top:3.5rem;
+      color:var(--muted);
+      font-size:.9rem;
+      text-align:center;
+    }
+
+    /* Responsive */
+    @media (max-width: 920px){
+      .hero-grid{ grid-template-columns:1fr; }
     }
   </style>
 </head>
 
 <body>
-<a class="skip-link" href="#content">Skip to content</a>
+<a class="skip-link" href="#about">Skip to content</a>
 
 <header>
   <div class="nav-inner">
-    <div class="brand">Tej Jolly</div>
-    <nav aria-label="Primary">
+    <div class="brand" aria-label="Site identity">
+      <div class="name">Tej Jolly</div>
+      <div class="role">Mechanical Engineering · CFD + ML</div>
+    </div>
+    <nav aria-label="Primary navigation">
       <ul>
-        <li><a class="nav-link" href="#about">About</a></li>
-        <li><a class="nav-link" href="#projects">Projects</a></li>
-        <li><a class="nav-link" href="#resume">Resume</a></li>
+        <li><a class="navlink" href="#about">About</a></li>
+        <li><a class="navlink" href="#project-descriptions">Project descriptions</a></li>
+        <li><a class="navlink" href="#resume">Resume</a></li>
       </ul>
     </nav>
   </div>
 </header>
 
 <main id="content">
+  <!-- HERO -->
+  <div class="hero-grid">
+    <section id="about" class="card hero" aria-label="About section">
+      <div class="card-inner">
+        <h1>Mechanical engineer specializing in CFD of environmental and cardiovascular flows.</h1>
+        <p class="lead">
+          I build simulation and modeling pipelines that translate complex flow physics into results that
+          climate modelers, energy system designers, and healthcare researchers can act on.
+        </p>
 
-  <!-- ABOUT / HERO -->
-  <section id="about" class="hero" aria-label="About">
-    <div class="about-card card">
-      <h1>CFD-first mechanical engineer focused on cardiovascular and environmental flows.</h1>
-      <p class="lead">
-        I build simulation and data pipelines that turn complex physical systems into decisions—quantifying uncertainty,
-        surfacing the assumptions that matter, and presenting results so clinicians and engineers can act on them.
-      </p>
-
-      <div class="hero-tags" aria-label="Primary areas">
-        <span class="tag">Computational Fluid Dynamics</span>
-        <span class="tag">Cardiovascular Biomechanics</span>
-        <span class="tag">Machine Learning</span>
-        <span class="tag">High-Performance Computing</span>
-      </div>
-
-      <div class="hero-actions">
-        <a class="btn btn-primary" href="#projects">View scored project descriptions</a>
-        <a class="btn btn-ghost" href="Resume_TJ.pdf">Resume (PDF)</a>
-      </div>
-
-      <p>
-        I am an M.S. mechanical engineering student at Carnegie Mellon University. In the BioSiMM Lab, I run coronary CFD
-        campaigns coupled to lumped-parameter networks to study how vessel geometry and microvascular resistance shift the
-        diagnostic indices used in coronary artery disease assessment. I also build applied CFD and perception pipelines
-        in course and team settings, prioritizing reproducible workflows and clear technical communication.
-      </p>
-
-      <p>
-        I am especially interested in roles where simulation, numerical methods, and data analysis work together—whether
-        the goal is patient-specific interpretation, safer infrastructure, or energy-efficient system design.
-      </p>
-
-      <!-- Rubric-friendly: link to resume directly below bio -->
-      <p style="margin-top:0.95rem;">
-        <strong>Quick link:</strong> <a href="Resume_TJ.pdf">Download resume (PDF)</a>
-      </p>
-    </div>
-
-    <!-- EXEC SUMMARY (Option A) -->
-    <aside class="exec-card card" aria-label="Executive summary and quick links">
-      <h2>Executive Summary</h2>
-
-      <div class="exec-grid">
-        <div class="exec-block">
-          <h3>Top Skills</h3>
-          <ul>
-            <li>3D CFD (SimVascular), meshing, boundary conditions, validation</li>
-            <li>HPC workflows (Slurm), parametric campaigns, reproducible pipelines</li>
-            <li>Python analysis (NumPy/Pandas), visualization, automation (VTK/ParaView)</li>
-            <li>ML &amp; CV prototyping (PyTorch, OpenCV) with clear evaluation metrics</li>
-          </ul>
+        <div class="quicklinks" aria-label="Quick links">
+          <span class="label">Quick links:</span>
+          <a class="btn btn-primary" href="#project-descriptions">Project descriptions ↓</a>
+          <a class="btn btn-primary" href="Resume_TJ.pdf" target="_blank" rel="noopener">Resume (PDF)</a>
         </div>
 
-        <div class="exec-block">
-          <h3>Quick Links</h3>
-          <div class="exec-links">
-            <a class="btn btn-ghost" href="#projects">Projects</a>
-            <a class="btn btn-ghost" href="#resume">Resume</a>
-            <!-- Optional: add when you have it -->
-            <!-- <a class="btn btn-ghost" href="Justification_Memo.pdf">Justification Memo</a> -->
+        <div style="margin-top:1.1rem;">
+          <h2 style="margin:0 0 .35rem; font-size:1.25rem;">About Me</h2>
+          <p style="margin:.25rem 0 0; color:var(--muted); max-width:78ch;">
+            I am an M.S. mechanical engineering student at Carnegie Mellon University and a member of the BioSiMM Lab,
+            where I study cardiovascular hemodynamics to better understand how disease alters flow, pressure, and transport.
+            Alongside CFD, I build machine-learning analysis pipelines for extracting structure from simulation datasets, and I
+            explore deep-learning approaches for accelerating solvers and high-dimensional modeling workflows.
+          </p>
+          <p style="margin:.6rem 0 0; color:var(--muted); max-width:78ch;">
+            I am especially interested in roles where simulation, numerical methods, and data analysis work together—whether the goal
+            is patient-specific interpretation, safer infrastructure, or energy-efficient system design.
+          </p>
+
+          <div class="pill-row" aria-label="Top skills">
+            <span class="pill">High-fidelity CFD (LES, DNS, multiphase, FSI)</span>
+            <span class="pill">High-performance computing (OpenMP, MPI, profiling)</span>
+            <span class="pill">Machine learning (diffusion, deep learning, CV, classical ML)</span>
           </div>
         </div>
+      </div>
+    </section>
 
-        <div class="exec-block">
-          <h3>What I Optimize For</h3>
-          <ul>
-            <li>Decision-grade metrics (not just “pretty flow fields”)</li>
-            <li>Traceable assumptions and sensitivity analyses</li>
-            <li>Communication that respects how people actually skim</li>
-          </ul>
+    <!-- RIGHT SIDEBAR: Resume snapshot + Awards/Publications/Tools -->
+    <aside class="card" aria-label="Resume snapshot and highlights">
+      <div class="card-inner">
+        <div class="meta-grid">
+
+          <div class="meta-block">
+            <h3>Resume Snapshot</h3>
+            <p style="margin-top:.25rem;">
+              These headings are structured to be easy to skim and machine-readable.
+            </p>
+
+            <div style="margin-top:.75rem;">
+              <h3 style="font-size:.98rem; margin:.8rem 0 .35rem;">Education</h3>
+              <ul class="meta-list">
+                <li><strong>Carnegie Mellon University</strong> — M.S., Mechanical Engineering (expected 2026)</li>
+                <li><strong>Johns Hopkins University</strong> — B.S., Mechanical Engineering (2020)</li>
+              </ul>
+
+              <h3 style="font-size:.98rem; margin:.8rem 0 .35rem;">Skills</h3>
+              <ul class="meta-list">
+                <li><strong>CFD:</strong> LES/DNS workflows, transport, boundary-condition modeling</li>
+                <li><strong>HPC:</strong> distributed runs, scaling/performance awareness</li>
+                <li><strong>ML:</strong> generative models, deep learning, computer vision, classical ML</li>
+              </ul>
+
+              <h3 style="font-size:.98rem; margin:.8rem 0 .35rem;">Certifications</h3>
+              <ul class="meta-list">
+                <li>Engineer in Training (EIT)</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="meta-block">
+            <h3>Awards, Honors, Certifications</h3>
+            <ul class="meta-list">
+              <li>1st Place — SB3C Master’s Student Paper Competition (2025)</li>
+              <li>Selected Participant — International High-Performance Computing Summer School (2025)</li>
+              <li>Engineer in Training (EIT)</li>
+            </ul>
+          </div>
+
+          <div class="meta-block">
+            <h3>Publications</h3>
+            <ul class="meta-list">
+              <li><strong>Proceedings (SB3C 2025):</strong> “Influence of microvascular resistance on diagnostic indices of coronary hemodynamics.”</li>
+              <li><strong>Submitted:</strong> “Influence of microvascular resistance on diagnostic indices of coronary hemodynamics.”</li>
+            </ul>
+          </div>
+
+          <div class="meta-block">
+            <h3>Tools</h3>
+            <ul class="meta-list">
+              <li>Ansys Fluent, Fire Dynamics Simulator (FDS), SimVascular</li>
+              <li>HyperMesh, PyTorch, OpenCV</li>
+              <li>OpenMP, Git</li>
+            </ul>
+          </div>
+
         </div>
       </div>
     </aside>
-  </section>
+  </div>
 
   <!-- PROJECTS -->
-  <section id="projects" aria-label="Projects">
-    <h2>Project Descriptions (Rubric-Scored)</h2>
+  <section id="project-descriptions" aria-label="Project descriptions">
+    <h2>Project descriptions</h2>
     <p class="section-intro">
-      Each project follows an IMRD structure: a clear social value and objective, methods and tools, results/evaluation,
-      and a short discussion of takeaways. Each drawer also clarifies my role and the skills emphasized.
+      Each project includes a concise objective and a structured “Details ↓” section with an IMRD/IDEC-style breakdown.
+      Links to posters, reports, and media are placed directly beneath the figure.
     </p>
 
-    <div class="project-grid">
+    <div class="projects-grid">
 
       <!-- Project 1 -->
-      <article class="project-card card" id="proj-microvascular" aria-label="Project 1: Microvascular Resistance">
-        <div class="project-top">
-          <div class="project-label">Project 1 · Research</div>
+      <article class="card project-card">
+        <div class="top">
+          <div class="project-kicker">Project 1 · Research</div>
           <h3>Microvascular Resistance and Coronary Diagnostic Indices</h3>
-          <div class="project-meta">BioSiMM Lab, Carnegie Mellon · 2024–present</div>
+          <p class="project-meta">BioSiMM Lab, Carnegie Mellon · 2024–present</p>
+        </div>
 
+        <div class="project-body">
           <figure>
-            <img src="microvascular_image.png" alt="Coronary CFD visualization used to study pressure and flow indices under varying microvascular resistance." />
-            <figcaption>Figure: Coronary CFD campaign framing—sweeping microvascular resistance to isolate its effect on pressure- and flow-based indices.</figcaption>
+            <img src="microvascular_image.png" alt="Coronary CFD visualization representing pressure/flow patterns" />
+            <figcaption>
+              Coronary CFD with controlled microvascular variations to understand when pressure- and flow-based indices disagree.
+            </figcaption>
           </figure>
 
-          <p class="objective">
-            <strong>Objective:</strong> Quantify how downstream microvascular resistance can shift FFR/CFR—and potentially change clinical decisions—independent of lesion geometry.
+          <div class="asset-links" aria-label="Project 1 links">
+            <a href="Poster_v5-5.pdf" target="_blank" rel="noopener">Poster (PDF)</a>
+          </div>
+
+          <p class="project-description">
+            <strong>Objective:</strong> quantify how downstream microvascular conditions can shift coronary diagnostic indices
+            across clinical thresholds—even when anatomy and lesion severity are held constant—so that interpretation is more
+            patient-specific and clinically reliable.
           </p>
 
-          <div class="chips" aria-label="Key results and scope">
-            <span class="chip">3D coronary CFD + LPN coupling</span>
-            <span class="chip">HMR sweep (controlled)</span>
-            <span class="chip">FFR/CFR computation</span>
-            <span class="chip">Slurm/HPC campaigns</span>
-          </div>
+          <p class="skills-line">
+            <strong>Skills highlighted:</strong> Coronary CFD · Lumped-parameter networks · HPC automation · ParaView/VTK scripting · Python analysis
+          </p>
 
-          <div class="project-actions">
-            <a class="btn btn-ghost" href="Poster_v5-5.pdf" target="_blank" rel="noopener">Poster (PDF)</a>
-            <!-- Add if you have it -->
-            <!-- <a class="btn btn-ghost" href="Paper_Preprint.pdf" target="_blank" rel="noopener">Preprint</a> -->
-          </div>
-
-          <details class="drawer">
-            <summary>
-              <span>Read IMRD write-up</span>
-              <span class="caret" aria-hidden="true"></span>
-            </summary>
-
-            <div class="drawer-body">
-              <h4>Introduction: Social Value + Project Objective</h4>
+          <details>
+            <summary>Details ↓ <span aria-hidden="true">▾</span></summary>
+            <div class="details-inner">
+              <h4>Introduction</h4>
               <p>
-                Coronary artery disease assessment often relies on indices such as Fractional Flow Reserve (FFR) and Coronary Flow Reserve (CFR).
-                In practice, patients can show discordant results that complicate treatment decisions. A key contributor is microvascular health:
-                if the downstream microvasculature is abnormal or already maximally dilated, pressure- and flow-based indices may not behave as
-                clinicians expect. This project isolates microvascular resistance as a variable and tests how it changes diagnostic readouts.
+                Pressure- and flow-derived coronary indices can be sensitive to microvascular state. Improving interpretation can
+                reduce misclassification risk and support better treatment decisions.
               </p>
 
               <h4>Methods</h4>
-              <ul>
-                <li>Built 3D coronary models and coupled outlet conditions to lumped-parameter networks representing distal beds.</li>
-                <li>Ran controlled sweeps of hyperemic microvascular resistance while holding upstream lesion geometry fixed.</li>
-                <li>Automated post-processing to compute FFR/CFR and related metrics consistently across cases.</li>
-              </ul>
-
-              <h4>Results / Evaluation</h4>
-              <ul>
-                <li>Produced comparative index tables across microvascular settings to identify sensitivity regimes (where indices are most/least stable).</li>
-                <li>Evaluated whether identical lesions can cross decision thresholds solely due to microvascular resistance changes (interpretation impact).</li>
-              </ul>
-
-              <h4>Discussion / Takeaways</h4>
               <p>
-                The core takeaway is interpretability: FFR/CFR are not just “lesion severity meters.” They embed assumptions about distal physiology.
-                The deliverable is a workflow that makes that dependence explicit, enabling more defensible, patient-specific interpretation.
+                Built 3D coronary models coupled to lumped-parameter networks; executed parameter sweeps over resistance states;
+                post-processed hemodynamics and indices at scale.
               </p>
 
-              <h4>My Role</h4>
-              <ul>
-                <li>Built/ran CFD campaigns, implemented LPN coupling assumptions, and automated analysis across parameter sweeps.</li>
-              </ul>
+              <h4>Results</h4>
+              <p>
+                Demonstrated that identical lesions can shift across decision thresholds under microvascular-only changes, motivating
+                microvascular-aware interpretation.
+              </p>
 
-              <p class="skills-line">
-                <strong>Skills emphasized:</strong> Coronary CFD · LPN modeling · ParaView/VTK automation · Slurm/HPC · Python analytics
+              <h4>Discussion</h4>
+              <p>
+                Highlights why “one-number” diagnostic thresholds should be contextualized by patient-specific downstream conditions,
+                especially in borderline cases.
+              </p>
+
+              <h4>Role</h4>
+              <p>
+                Led simulation pipeline execution and post-processing automation; synthesized findings for communication in poster format.
               </p>
             </div>
           </details>
         </div>
       </article>
 
-      <!-- Project 2 (Carotid placed right after microvascular) -->
-      <article class="project-card card" id="proj-carotid" aria-label="Project 2: Carotid Hemodynamics">
-        <div class="project-top">
-          <div class="project-label">Project 2 · Hemodynamics</div>
+      <!-- Project 2 -->
+      <article class="card project-card">
+        <div class="top">
+          <div class="project-kicker">Project 2 · Hemodynamics</div>
           <h3>Carotid Bifurcation Angle &amp; Stenosis Influence on Hemodynamics</h3>
-          <div class="project-meta">Carotid CFD Study · 2024</div>
+          <p class="project-meta">Carotid CFD Study · 2024</p>
+        </div>
 
+        <div class="project-body">
           <figure>
-            <img src="carotid/carotid.gif" alt="Wall shear stress visualization across carotid geometries with different angles and stenosis levels." />
-            <figcaption>Figure: Wall shear stress patterns across bifurcation angles and stenosis levels; used to compare low-/high-WSS exposure areas.</figcaption>
+            <img src="carotid/carotid.gif" alt="Carotid bifurcation wall shear stress visualization" />
+            <figcaption>
+              Wall shear stress (WSS) visualization for carotid geometries with controlled changes in angle and stenosis.
+            </figcaption>
           </figure>
 
-          <p class="objective">
-            <strong>Objective:</strong> Determine how bifurcation angle and stenosis severity change low-/high-WSS exposure linked to plaque progression risk.
+          <div class="asset-links" aria-label="Project 2 links">
+            <a href="carotid/carotid_labeled.mp4" target="_blank" rel="noopener">Video</a>
+            <a href="carotid/final_report.pdf" target="_blank" rel="noopener">Report (PDF)</a>
+          </div>
+
+          <p class="project-description">
+            <strong>Objective:</strong> evaluate how geometric variation (bifurcation angle) and localized stenosis modulate WSS
+            patterns linked to vascular risk, supporting better geometric intuition for disease progression and intervention planning.
           </p>
 
-          <div class="chips" aria-label="Key results and scope">
-            <span class="chip">Angle: 50° vs 70°</span>
-            <span class="chip">Stenosis: 0% vs 30%</span>
-            <span class="chip">Pulsatile inflow</span>
-            <span class="chip">WSS thresholds</span>
-          </div>
+          <p class="skills-line">
+            <strong>Skills highlighted:</strong> Vascular CFD · Pulsatile flow · Mesh generation · Boundary conditions · WSS quantification
+          </p>
 
-          <div class="project-actions">
-            <a class="btn btn-ghost" href="carotid/carotid_labeled.mp4" target="_blank" rel="noopener">Labeled video</a>
-            <a class="btn btn-ghost" href="carotid/final_report.pdf" target="_blank" rel="noopener">Report (PDF)</a>
-          </div>
-
-          <details class="drawer">
-            <summary>
-              <span>Read IMRD write-up</span>
-              <span class="caret" aria-hidden="true"></span>
-            </summary>
-
-            <div class="drawer-body">
-              <h4>Introduction: Social Value + Project Objective</h4>
+          <details>
+            <summary>Details ↓ <span aria-hidden="true">▾</span></summary>
+            <div class="details-inner">
+              <h4>Introduction</h4>
               <p>
-                Carotid plaque burden and stroke risk correlate with hemodynamic environments, especially regions of persistently low wall shear stress (WSS).
-                Because carotid anatomy varies widely across patients, it is useful to understand which geometric features systematically shift WSS distributions.
-                This study tests how bifurcation angle and stenosis severity change WSS exposure in a controlled, comparative setup.
+                Regions of abnormally low or high WSS are associated with plaque initiation and destabilization. Understanding how geometry
+                drives these patterns supports better mechanistic reasoning.
               </p>
 
               <h4>Methods</h4>
-              <ul>
-                <li>Generated a generalized 3D carotid geometry (CCA/ICA/ECA) and varied angle and ECA stenosis severity.</li>
-                <li>Prescribed a published pulsatile inflow waveform and tuned outlet boundary conditions to achieve realistic splits/pressures.</li>
-                <li>Computed surface area exposed to very low (&lt; 5 dyn/cm²) and very high (&gt; 70 dyn/cm²) WSS at key cycle phases.</li>
-              </ul>
-
-              <h4>Results / Evaluation</h4>
-              <ul>
-                <li>Quantified how stenosis increased low-WSS area at fixed angle; compared angle changes at fixed stenosis.</li>
-                <li>Used consistent thresholds and reporting so comparisons were not confounded by plotting choices.</li>
-              </ul>
-
-              <h4>Discussion / Takeaways</h4>
               <p>
-                The key deliverable is a geometry-to-risk-factor mapping: even with identical boundary conditions, geometric changes can shift the spatial
-                distribution of hemodynamic “risk markers.” This supports careful interpretation when translating population averages to patient-specific anatomy.
+                Systematically varied angle and stenosis; ran pulsatile simulations; computed surface-area exposure to low/high WSS at key
+                cardiac phases.
               </p>
 
-              <h4>My Role</h4>
-              <ul>
-                <li>Built geometries/meshes, executed simulations, and implemented the WSS exposure analysis and summary reporting.</li>
-              </ul>
+              <h4>Results</h4>
+              <p>
+                Quantified changes in low-WSS exposure with stenosis/angle adjustments; summarized directional effects of geometry changes.
+              </p>
 
-              <p class="skills-line">
-                <strong>Skills emphasized:</strong> Vascular CFD · Meshing strategy · Pulsatile BCs · Post-processing &amp; metrics · Technical reporting
+              <h4>Discussion</h4>
+              <p>
+                Suggests geometry can amplify or mitigate hemodynamic risk factors, reinforcing the value of controlled parametric studies
+                alongside patient-specific modeling.
+              </p>
+
+              <h4>Role</h4>
+              <p>
+                Built models/meshes, ran simulations, and performed WSS analysis; packaged outputs into report + media for clear review.
               </p>
             </div>
           </details>
@@ -744,72 +654,62 @@
       </article>
 
       <!-- Project 3 -->
-      <article class="project-card card" id="proj-decarb" aria-label="Project 3: Decarbonization Building CFD">
-        <div class="project-top">
-          <div class="project-label">Project 3 · Course Project</div>
+      <article class="card project-card">
+        <div class="top">
+          <div class="project-kicker">Project 3 · Environmental CFD</div>
           <h3>Decarbonization Building CFD: Reducing Re-Entrained Exhaust</h3>
-          <div class="project-meta">Computational Fluid Dynamics · Fall 2024</div>
+          <p class="project-meta">Computational Fluid Dynamics · Fall 2024</p>
+        </div>
 
+        <div class="project-body">
           <figure>
-            <img src="decarb_image.jpg" alt="External flow CFD visualization showing wake and scalar transport near a building." />
-            <figcaption>Figure: Wake-driven re-entrainment risk—used to compare how shape and operating point affect scalar return to the inlet.</figcaption>
+            <img src="decarb_image.jpg" alt="External-flow wake visualization around a facility concept" />
+            <figcaption>
+              External-flow CFD used to evaluate re-entrainment risk from facility exhaust under adverse wind conditions.
+            </figcaption>
           </figure>
 
-          <p class="objective">
-            <strong>Objective:</strong> Identify building shapes and intake/exhaust operating points that reduce re-entrainment and improve decarbonization efficiency.
+          <div class="asset-links" aria-label="Project 3 links">
+            <a href="MassFrac_dither.gif" target="_blank" rel="noopener">Scalar transport (GIF)</a>
+          </div>
+
+          <p class="project-description">
+            <strong>Objective:</strong> reduce energy waste in direct-air-capture facility concepts by identifying shapes and operating
+            conditions that minimize exhaust re-entrainment into inlets.
           </p>
 
-          <div class="chips" aria-label="Key results and scope">
-            <span class="chip">External-flow CFD</span>
-            <span class="chip">Passive scalar transport</span>
-            <span class="chip">Parametric geometry study</span>
-            <span class="chip">Re-entrainment metric</span>
-          </div>
+          <p class="skills-line">
+            <strong>Skills highlighted:</strong> External-flow CFD · Transport modeling · Parametric studies · Engineering communication
+          </p>
 
-          <div class="project-actions">
-            <a class="btn btn-ghost" href="MassFrac_dither.gif" target="_blank" rel="noopener">Scalar transport (GIF)</a>
-          </div>
-
-          <details class="drawer">
-            <summary>
-              <span>Read IMRD write-up</span>
-              <span class="caret" aria-hidden="true"></span>
-            </summary>
-
-            <div class="drawer-body">
-              <h4>Introduction: Social Value + Project Objective</h4>
+          <details>
+            <summary>Details ↓ <span aria-hidden="true">▾</span></summary>
+            <div class="details-inner">
+              <h4>Introduction</h4>
               <p>
-                Direct-air-capture and related decarbonization facilities consume significant energy, so flow inefficiencies matter.
-                Under adverse winds, cleaned exhaust can recirculate into the inlet, reducing CO₂ removal per unit energy. This project
-                evaluates how geometry and flow settings influence re-entrainment so design decisions can be made early and defensibly.
+                Re-entrainment can lower CO₂ removal efficiency by feeding processed exhaust back into the intake, increasing operating cost
+                and reducing climate impact per unit energy.
               </p>
 
               <h4>Methods</h4>
-              <ul>
-                <li>Defined an atmospheric boundary-layer domain and candidate building geometries.</li>
-                <li>Simulated wake development and transported a passive scalar representing processed exhaust.</li>
-                <li>Compared cases using a consistent inlet “re-entrainment fraction” metric.</li>
-              </ul>
-
-              <h4>Results / Evaluation</h4>
-              <ul>
-                <li>Ranked geometries/operating points by re-entrainment risk under the tested wind conditions.</li>
-                <li>Identified design features that reduce wake recirculation and scalar return pathways.</li>
-              </ul>
-
-              <h4>Discussion / Takeaways</h4>
               <p>
-                The value is not a single “best shape,” but a workflow: quantify re-entrainment as a measurable output and use it to guide
-                early design choices that improve efficiency and robustness.
+                Defined a simplified domain and boundary conditions; tested candidate geometries; tracked a passive scalar as a proxy for
+                processed exhaust.
               </p>
 
-              <h4>My Role</h4>
-              <ul>
-                <li>Set up transport metrics and contributed to case comparison and reporting; emphasized readable, decision-focused figures.</li>
-              </ul>
+              <h4>Results</h4>
+              <p>
+                Identified geometric/flow configurations associated with reduced near-inlet recirculation and lower exhaust fraction at the intake.
+              </p>
 
-              <p class="skills-line">
-                <strong>Skills emphasized:</strong> External-flow CFD · Species/scalar transport · Parametric studies · Communication of results
+              <h4>Discussion</h4>
+              <p>
+                Provides design guidance for early-stage facility layout decisions where small changes can materially impact efficiency and operating cost.
+              </p>
+
+              <h4>Role</h4>
+              <p>
+                Implemented transport diagnostics and contributed to simulation workflow + synthesis of results into a structured write-up.
               </p>
             </div>
           </details>
@@ -817,107 +717,123 @@
       </article>
 
       <!-- Project 4 -->
-      <article class="project-card card" id="proj-playervision" aria-label="Project 4: PlayerVision">
-        <div class="project-top">
-          <div class="project-label">Project 4 · Computer Vision</div>
-          <h3>PlayerVision: Real-Time Player &amp; Ball Tracking for Sports</h3>
-          <div class="project-meta">Computer Vision for Engineers · Fall 2024</div>
+      <article class="card project-card">
+        <div class="top">
+          <div class="project-kicker">Project 4 · Deep Learning</div>
+          <h3>Modular Diffusion Model Framework for Image Synthesis (Built From Scratch)</h3>
+          <p class="project-meta">Deep Learning · Fall 2024</p>
+        </div>
 
+        <div class="project-body">
           <figure>
-            <img src="playervis_image.png" alt="Soccer broadcast frame with player detections and tracking overlays." />
-            <figcaption>Figure: Prototype broadcast overlay—player/ball detection, tracking continuity, and team labeling for real-time augmentation.</figcaption>
+            <img src="diffusion_image.png" alt="Grid of sample generations illustrating diffusion model outputs" />
+            <figcaption>
+              Modular diffusion pipeline with incremental upgrades (DDPM → DDIM → latent diffusion + guidance), evaluated with FID/IS.
+            </figcaption>
           </figure>
 
-          <p class="objective">
-            <strong>Objective:</strong> Build a near real-time pipeline that identifies and tracks players and ball possession to reduce manual tagging overhead.
-          </p>
-
-          <div class="chips" aria-label="Key results and scope">
-            <span class="chip">YOLO detection</span>
-            <span class="chip">DeepSORT tracking</span>
-            <span class="chip">Color-based team labeling</span>
-            <span class="chip">Ball-carrier proximity</span>
+          <div class="asset-links" aria-label="Project 4 links">
+            <a href="DL_HW5_Preliminary_Report-4.pdf" target="_blank" rel="noopener">Report (PDF)</a>
           </div>
 
-          <details class="drawer">
-            <summary>
-              <span>Read IMRD write-up</span>
-              <span class="caret" aria-hidden="true"></span>
-            </summary>
+          <p class="project-description">
+            <strong>Objective:</strong> implement a complete diffusion-based generative modeling stack from the ground up and quantify
+            how architectural and algorithmic choices improve quality–compute tradeoffs in sampling and training.
+          </p>
 
-            <div class="drawer-body">
-              <h4>Introduction: Social Value + Project Objective</h4>
+          <p class="skills-line">
+            <strong>Skills highlighted:</strong> PyTorch · DDPM/DDIM · Latent diffusion · Classifier-free guidance · Training stability (EMA/schedules) · Evaluation (FID/IS)
+          </p>
+
+          <details>
+            <summary>Details ↓ <span aria-hidden="true">▾</span></summary>
+            <div class="details-inner">
+              <h4>Introduction</h4>
               <p>
-                Broadcast analytics still relies heavily on manual annotation, which limits scale and consistency. A robust computer-vision pipeline can
-                automate routine tagging tasks, enabling richer statistics and faster production workflows. This project prototypes a detection + tracking
-                system for soccer broadcasts with interpretable, on-screen overlays.
+                Diffusion models produce high-quality samples but can be computationally intensive, especially in pixel space. This project
+                targets practical efficiency improvements while preserving fidelity.
               </p>
 
               <h4>Methods</h4>
-              <ul>
-                <li>Detected players and ball using a YOLO-based model; maintained identities over time using DeepSORT.</li>
-                <li>Implemented contrast enhancement and a pitch-masking approach to stabilize color signals.</li>
-                <li>Assigned team labels via jersey-color clustering; identified ball-carrier/nearest defender using proximity logic.</li>
-              </ul>
-
-              <h4>Results / Evaluation</h4>
-              <ul>
-                <li>Demonstrated continuous tracking with team labeling overlays on representative broadcast clips.</li>
-                <li>Validated stability qualitatively by checking identity continuity across camera motion and short occlusions.</li>
-              </ul>
-
-              <h4>Discussion / Takeaways</h4>
               <p>
-                The main engineering lesson is robustness: practical systems need both strong models and “small” preprocessing choices that prevent
-                failure under lighting changes, motion blur, and clutter.
+                Implemented a baseline DDPM and expanded the framework to support accelerated deterministic sampling (DDIM), latent diffusion
+                with a VAE, and classifier-free guidance for conditional generation. Added stability/quality strategies such as EMA, improved
+                scheduling, and increased U-Net capacity.
               </p>
 
-              <h4>My Role</h4>
-              <ul>
-                <li>Implemented preprocessing, jersey-color clustering, and possession/nearest-defender logic; integrated overlays for readability.</li>
-              </ul>
+              <h4>Results</h4>
+              <p>
+                Compared variants using standard generative metrics and demonstrated that combining latent-space operation with guidance and
+                training improvements yields substantial quality gains over baseline configurations.
+              </p>
 
-              <p class="skills-line">
-                <strong>Skills emphasized:</strong> Python · OpenCV · Model integration · Tracking logic · Evaluation-minded prototyping
+              <h4>Discussion</h4>
+              <p>
+                Clarifies the “design space” of diffusion systems: where compute is spent (pixel vs latent), how sampling is accelerated (DDIM),
+                and how conditioning/scheduling choices shift the fidelity–speed frontier.
+              </p>
+
+              <h4>Role</h4>
+              <p>
+                Implemented core diffusion components and training loop; contributed experimentation and analysis, and documented the framework
+                in a formal report.
               </p>
             </div>
           </details>
         </div>
       </article>
 
-      <!-- Optional extra project (not part of the 4 scored descriptions) -->
-      <article class="project-card card" id="proj-diffusion" aria-label="Additional Project: Diffusion Models">
-        <div class="project-top">
-          <div class="project-label">Additional Project · Deep Learning</div>
-          <h3>Modular Diffusion Model Framework for Image Synthesis</h3>
-          <div class="project-meta">Deep Learning · Fall 2024</div>
+      <!-- Optional / Additional project (kept, but clearly not part of the 4) -->
+      <article class="card project-card" aria-label="Additional project">
+        <div class="top">
+          <div class="project-kicker">Additional · Computer Vision</div>
+          <h3>PlayerVision: Real-Time Player &amp; Ball Tracking for Sports</h3>
+          <p class="project-meta">Computer Vision for Engineers · Fall 2024</p>
+        </div>
 
+        <div class="project-body">
           <figure>
-            <img src="diffusion_image.png" alt="Illustration representing diffusion model denoising progression." />
-            <figcaption>Figure: Modular diffusion toolkit—structured to compare DDPM vs DDIM sampling and latent diffusion speed/quality tradeoffs.</figcaption>
+            <img src="playervis_image.png" alt="Tracking overlay for players and ball in soccer footage" />
+            <figcaption>
+              Real-time perception pipeline: detection, tracking, team assignment, and proximity analytics for broadcast augmentation.
+            </figcaption>
           </figure>
 
-          <p class="objective">
-            <strong>Summary:</strong> Built core DDPM training loop + U-Net with timestep conditioning; compared faster sampling strategies and latent diffusion variants.
+          <p class="project-description">
+            <strong>Objective:</strong> automate player/ball perception to support faster annotation and richer broadcast overlays in
+            sports analytics workflows.
           </p>
 
-          <div class="chips">
-            <span class="chip">PyTorch</span>
-            <span class="chip">U-Net + conditioning</span>
-            <span class="chip">DDPM/DDIM</span>
-            <span class="chip">FID-driven evaluation</span>
-          </div>
+          <p class="skills-line">
+            <strong>Skills highlighted:</strong> OpenCV · Detection/tracking · Feature engineering · Real-time visualization
+          </p>
 
-          <details class="drawer">
-            <summary>
-              <span>Open summary</span>
-              <span class="caret" aria-hidden="true"></span>
-            </summary>
-
-            <div class="drawer-body">
+          <details>
+            <summary>Details ↓ <span aria-hidden="true">▾</span></summary>
+            <div class="details-inner">
+              <h4>Introduction</h4>
               <p>
-                This project is included as an extra example of evaluation-driven ML engineering. If you prefer to keep only four projects visible for the rubric,
-                you can remove this card entirely.
+                Manual tagging remains a bottleneck in sports analytics and production. Robust perception pipelines can reduce workload and enable new viewer experiences.
+              </p>
+
+              <h4>Methods</h4>
+              <p>
+                Built a pipeline for detection + tracking, with color-based team assignment and proximity-based ball-carrier highlighting.
+              </p>
+
+              <h4>Results</h4>
+              <p>
+                Produced a working prototype with persistent tracks and team labels suitable for iterative improvement and evaluation.
+              </p>
+
+              <h4>Discussion</h4>
+              <p>
+                Highlights practical challenges: camera motion, occlusions, and appearance changes; suggests directions for robustness improvements.
+              </p>
+
+              <h4>Role</h4>
+              <p>
+                Implemented preprocessing and team-color clustering module; integrated visualization and proximity analytics.
               </p>
             </div>
           </details>
@@ -928,104 +844,57 @@
   </section>
 
   <!-- RESUME -->
-  <section id="resume" aria-label="Resume">
+  <section id="resume" aria-label="Resume section">
     <h2>Resume</h2>
     <p class="section-intro">
-      Download the one-page PDF resume, plus an ATS-friendly snapshot below that uses standard headings (Education, Skills, Experience) to support skimming.
+      Download the one-page resume PDF. (The “Resume Snapshot” and headings appear at the top of the page for skimmers.)
     </p>
 
-    <div class="resume-wrap">
-      <div class="resume-card card">
-        <h3>Resume (PDF)</h3>
-        <p>
-          <a class="btn btn-primary" href="Resume_TJ.pdf" download>Download Resume</a>
+    <div class="card resume-box" style="margin-top:1rem;">
+      <div class="card-inner">
+        <p style="margin:.1rem 0 .75rem; color:var(--muted);">
+          Prefer a quick skim? Start with the Resume Snapshot in the right-hand panel at the top of this page.
         </p>
-        <p>
-          Tip for rubric alignment: ensure the PDF’s headings are machine-readable (Education, Skills, Experience) and place your most employer-relevant skills
-          where a skimmer will see them first (top/left, headings, or a skills column).
-        </p>
-      </div>
-
-      <div class="ats-card card" aria-label="ATS-friendly resume snapshot">
-        <h3>ATS-Friendly Snapshot</h3>
-
-        <div class="ats-grid">
-          <div class="ats-section">
-            <h4>Education</h4>
-            <ul>
-              <li>Carnegie Mellon University — M.S. Mechanical Engineering (Research)</li>
-            </ul>
-          </div>
-
-          <div class="ats-section">
-            <h4>Skills</h4>
-            <ul>
-              <li>CFD: SimVascular, boundary conditions, WSS/flow metrics, transport</li>
-              <li>HPC: Slurm, parametric runs, automation, reproducible workflows</li>
-              <li>Python: NumPy/Pandas, visualization, VTK/ParaView scripting</li>
-              <li>ML/CV: PyTorch, OpenCV, detection/tracking pipelines</li>
-            </ul>
-          </div>
-
-          <div class="ats-section">
-            <h4>Experience</h4>
-            <ul>
-              <li>BioSiMM Lab — Coronary CFD + microvascular resistance studies</li>
-              <li>Course/team projects — External-flow CFD and CV prototype systems</li>
-            </ul>
-          </div>
-        </div>
+        <a class="btn btn-primary" href="Resume_TJ.pdf" target="_blank" rel="noopener">Open resume (PDF)</a>
       </div>
     </div>
   </section>
 
-  <footer aria-label="Footer">
-    <div class="footer-inner">
-      <div>
-        <strong>Tej Jolly</strong> · Engineering Portfolio
-      </div>
-      <div>
-        <a href="#about">About</a> · <a href="#projects">Projects</a> · <a href="#resume">Resume</a>
-      </div>
-    </div>
+  <footer>
+    <p style="margin:0;">© <span id="year"></span> Tej Jolly</p>
   </footer>
-
 </main>
 
 <script>
-  // Active-section nav highlighting
-  (function () {
-    const links = Array.from(document.querySelectorAll(".nav-link"));
-    const sections = links
-      .map(a => document.querySelector(a.getAttribute("href")))
-      .filter(Boolean);
+  // Footer year
+  document.getElementById("year").textContent = new Date().getFullYear();
 
-    const setActive = (id) => {
-      links.forEach(a => a.classList.toggle("active", a.getAttribute("href") === "#" + id));
-    };
+  // Active-section nav highlighting (IntersectionObserver)
+  const links = Array.from(document.querySelectorAll(".navlink"));
+  const sections = links
+    .map(a => document.querySelector(a.getAttribute("href")))
+    .filter(Boolean);
 
-    const observer = new IntersectionObserver((entries) => {
-      // choose the most visible intersecting section
-      const visible = entries
-        .filter(e => e.isIntersecting)
-        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-      if (visible && visible.target && visible.target.id) setActive(visible.target.id);
-    }, {
-      root: null,
-      threshold: [0.25, 0.35, 0.5, 0.65],
-      rootMargin: "-20% 0px -55% 0px"
-    });
+  const byId = new Map(links.map(a => [a.getAttribute("href"), a]));
 
-    sections.forEach(sec => observer.observe(sec));
+  const observer = new IntersectionObserver((entries) => {
+    // Pick the most visible intersecting section
+    const visible = entries
+      .filter(e => e.isIntersecting)
+      .sort((a,b) => b.intersectionRatio - a.intersectionRatio)[0];
 
-    // Accordion behavior: keep only one drawer open at a time (within the page)
-    const drawers = Array.from(document.querySelectorAll("details.drawer"));
-    drawers.forEach(d => {
-      d.addEventListener("toggle", () => {
-        if (d.open) drawers.forEach(other => { if (other !== d) other.open = false; });
-      });
-    });
-  })();
+    if (!visible) return;
+
+    links.forEach(a => a.classList.remove("active"));
+    const activeLink = byId.get("#" + visible.target.id);
+    if (activeLink) activeLink.classList.add("active");
+  }, {
+    root: null,
+    rootMargin: "-30% 0px -60% 0px",
+    threshold: [0.05, 0.15, 0.25, 0.4, 0.6]
+  });
+
+  sections.forEach(sec => observer.observe(sec));
 </script>
 
 </body>

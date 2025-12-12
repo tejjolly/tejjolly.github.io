@@ -1,3 +1,10 @@
+Updates applied per your notes:
+
+* **Publications** now mirror your CV’s author-leading format. 
+* Removed the standalone **Certifications** block to avoid duplication (EIT remains under Awards/Honors, consistent with your CV). 
+* Removed the **bottom Resume section entirely**; the nav “Resume” now targets the **top-right Resume Snapshot card**.
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -196,6 +203,33 @@
       box-shadow:0 14px 28px rgba(165,0,33,0.22);
     }
 
+    /* RIGHT CARD: height matched to left via JS */
+    #resume .card-inner{
+      overflow:auto;            /* enables scrolling if constrained */
+      scrollbar-gutter: stable; /* reduces layout shift where supported */
+    }
+    .snapshot-title{
+      display:flex;
+      align-items:baseline;
+      justify-content:space-between;
+      gap:1rem;
+      padding-bottom:.55rem;
+      border-bottom:1px solid rgba(227,227,227,0.85);
+      margin-bottom:.85rem;
+    }
+    .snapshot-title .who{
+      font-weight:900;
+      letter-spacing:-0.01em;
+      font-size:1.02rem;
+      color:var(--text);
+    }
+    .snapshot-title .label{
+      font-weight:800;
+      color:var(--muted);
+      font-size:.92rem;
+      white-space:nowrap;
+    }
+
     .meta-grid{
       display:grid;
       grid-template-columns:1fr;
@@ -281,10 +315,7 @@
       margin:0;
     }
 
-    figure{
-      margin:0;
-      padding:0;
-    }
+    figure{ margin:0; padding:0; }
     figure img{
       width:100%;
       display:block;
@@ -371,12 +402,6 @@
     }
     .details-inner p{ margin:.25rem 0; }
 
-    /* Resume */
-    .resume-box{
-      max-width:720px;
-    }
-
-    /* Footer */
     footer{
       margin-top:3.5rem;
       color:var(--muted);
@@ -384,9 +409,9 @@
       text-align:center;
     }
 
-    /* Responsive */
     @media (max-width: 920px){
       .hero-grid{ grid-template-columns:1fr; }
+      #resume .card-inner{ max-height:none !important; } /* avoid awkward scrolling on mobile */
     }
   </style>
 </head>
@@ -449,40 +474,36 @@
       </div>
     </section>
 
-    <!-- RIGHT SIDEBAR: Resume snapshot + Awards/Publications/Tools -->
-    <aside class="card" aria-label="Resume snapshot and highlights">
-      <div class="card-inner">
+    <!-- RIGHT SIDEBAR: Resume Snapshot + Awards/Publications/Tools -->
+    <aside id="resume" class="card" aria-label="Resume snapshot and highlights">
+      <div class="card-inner" id="resumeInner">
+        <div class="snapshot-title" aria-label="Resume snapshot header">
+          <div class="who">Tej Jolly</div>
+          <div class="label">Resume Snapshot</div>
+        </div>
+
         <div class="meta-grid">
-
           <div class="meta-block">
-            <h3>Resume Snapshot</h3>
-            <p style="margin-top:.25rem;">
-              These headings are structured to be easy to skim and machine-readable.
-            </p>
+            <h3>Education</h3>
+            <ul class="meta-list">
+              <li><strong>Carnegie Mellon University</strong> — M.S., Mechanical Engineering (expected 2026)</li>
+              <li><strong>Johns Hopkins University</strong> — B.S., Mechanical Engineering (2020)</li>
+            </ul>
 
-            <div style="margin-top:.75rem;">
-              <h3 style="font-size:.98rem; margin:.8rem 0 .35rem;">Education</h3>
-              <ul class="meta-list">
-                <li><strong>Carnegie Mellon University</strong> — M.S., Mechanical Engineering (expected 2026)</li>
-                <li><strong>Johns Hopkins University</strong> — B.S., Mechanical Engineering (2020)</li>
-              </ul>
+            <h3 style="margin-top:.9rem;">Skills</h3>
+            <ul class="meta-list">
+              <li><strong>CFD:</strong> LES/DNS workflows, transport, boundary-condition modeling</li>
+              <li><strong>HPC:</strong> distributed runs, scaling/performance awareness</li>
+              <li><strong>ML:</strong> generative models, deep learning, computer vision, classical ML</li>
+            </ul>
 
-              <h3 style="font-size:.98rem; margin:.8rem 0 .35rem;">Skills</h3>
-              <ul class="meta-list">
-                <li><strong>CFD:</strong> LES/DNS workflows, transport, boundary-condition modeling</li>
-                <li><strong>HPC:</strong> distributed runs, scaling/performance awareness</li>
-                <li><strong>ML:</strong> generative models, deep learning, computer vision, classical ML</li>
-              </ul>
-
-              <h3 style="font-size:.98rem; margin:.8rem 0 .35rem;">Certifications</h3>
-              <ul class="meta-list">
-                <li>Engineer in Training (EIT)</li>
-              </ul>
+            <div style="margin-top:.9rem;">
+              <a class="btn btn-primary" href="Resume_TJ.pdf" target="_blank" rel="noopener">Open resume (PDF)</a>
             </div>
           </div>
 
           <div class="meta-block">
-            <h3>Awards, Honors, Certifications</h3>
+            <h3>Awards &amp; Honors</h3>
             <ul class="meta-list">
               <li>1st Place — SB3C Master’s Student Paper Competition (2025)</li>
               <li>Selected Participant — International High-Performance Computing Summer School (2025)</li>
@@ -493,8 +514,14 @@
           <div class="meta-block">
             <h3>Publications</h3>
             <ul class="meta-list">
-              <li><strong>Proceedings (SB3C 2025):</strong> “Influence of microvascular resistance on diagnostic indices of coronary hemodynamics.”</li>
-              <li><strong>Submitted:</strong> “Influence of microvascular resistance on diagnostic indices of coronary hemodynamics.”</li>
+              <li>
+                Jolly T, Garcha A, Grande Gutiérrez N. Influence of microvascular resistance on diagnostic indices of coronary hemodynamics.
+                <em>In:</em> <em>Proceedings of the Summer Biomechanics, Bioengineering, and Biotransport Conference (SB3C)</em>; 2025.
+              </li>
+              <li>
+                Jolly T, Garcha A, Grande Gutiérrez N. Influence of microvascular resistance on diagnostic indices of coronary hemodynamics.
+                <em>Submitted.</em>
+              </li>
             </ul>
           </div>
 
@@ -506,7 +533,6 @@
               <li>OpenMP, Git</li>
             </ul>
           </div>
-
         </div>
       </div>
     </aside>
@@ -515,10 +541,6 @@
   <!-- PROJECTS -->
   <section id="project-descriptions" aria-label="Project descriptions">
     <h2>Project descriptions</h2>
-    <p class="section-intro">
-      Each project includes a concise objective and a structured “Details ↓” section with an IMRD/IDEC-style breakdown.
-      Links to posters, reports, and media are placed directly beneath the figure.
-    </p>
 
     <div class="projects-grid">
 
@@ -544,8 +566,7 @@
 
           <p class="project-description">
             <strong>Objective:</strong> quantify how downstream microvascular conditions can shift coronary diagnostic indices
-            across clinical thresholds—even when anatomy and lesion severity are held constant—so that interpretation is more
-            patient-specific and clinically reliable.
+            across decision thresholds—even when anatomy and lesion severity are held constant—so interpretation is more patient-specific.
           </p>
 
           <p class="skills-line">
@@ -569,14 +590,12 @@
 
               <h4>Results</h4>
               <p>
-                Demonstrated that identical lesions can shift across decision thresholds under microvascular-only changes, motivating
-                microvascular-aware interpretation.
+                Demonstrated that identical lesions can shift across decision thresholds under microvascular-only changes.
               </p>
 
               <h4>Discussion</h4>
               <p>
-                Highlights why “one-number” diagnostic thresholds should be contextualized by patient-specific downstream conditions,
-                especially in borderline cases.
+                Motivates microvascular-aware interpretation, especially in borderline cases where thresholds are used rigidly.
               </p>
 
               <h4>Role</h4>
@@ -611,7 +630,7 @@
 
           <p class="project-description">
             <strong>Objective:</strong> evaluate how geometric variation (bifurcation angle) and localized stenosis modulate WSS
-            patterns linked to vascular risk, supporting better geometric intuition for disease progression and intervention planning.
+            patterns linked to vascular risk, supporting better mechanistic reasoning about disease progression.
           </p>
 
           <p class="skills-line">
@@ -623,8 +642,8 @@
             <div class="details-inner">
               <h4>Introduction</h4>
               <p>
-                Regions of abnormally low or high WSS are associated with plaque initiation and destabilization. Understanding how geometry
-                drives these patterns supports better mechanistic reasoning.
+                Regions of abnormally low or high WSS are associated with plaque initiation and destabilization. Understanding geometry-driven
+                changes supports clearer hemodynamic intuition.
               </p>
 
               <h4>Methods</h4>
@@ -640,13 +659,12 @@
 
               <h4>Discussion</h4>
               <p>
-                Suggests geometry can amplify or mitigate hemodynamic risk factors, reinforcing the value of controlled parametric studies
-                alongside patient-specific modeling.
+                Suggests geometry can amplify or mitigate hemodynamic risk factors, reinforcing the value of controlled parametric studies.
               </p>
 
               <h4>Role</h4>
               <p>
-                Built models/meshes, ran simulations, and performed WSS analysis; packaged outputs into report + media for clear review.
+                Built models/meshes, ran simulations, and performed WSS analysis; packaged outputs into report + media for review.
               </p>
             </div>
           </details>
@@ -699,12 +717,12 @@
 
               <h4>Results</h4>
               <p>
-                Identified geometric/flow configurations associated with reduced near-inlet recirculation and lower exhaust fraction at the intake.
+                Identified configurations associated with reduced near-inlet recirculation and lower exhaust fraction at the intake.
               </p>
 
               <h4>Discussion</h4>
               <p>
-                Provides design guidance for early-stage facility layout decisions where small changes can materially impact efficiency and operating cost.
+                Provides early-stage design guidance where small changes can materially impact efficiency and operating cost.
               </p>
 
               <h4>Role</h4>
@@ -728,7 +746,7 @@
           <figure>
             <img src="diffusion_image.png" alt="Grid of sample generations illustrating diffusion model outputs" />
             <figcaption>
-              Modular diffusion pipeline with incremental upgrades (DDPM → DDIM → latent diffusion + guidance), evaluated with FID/IS.
+              Modular diffusion pipeline with incremental upgrades (DDPM → DDIM → latent diffusion + CFG), evaluated with FID/IS.
             </figcaption>
           </figure>
 
@@ -738,11 +756,11 @@
 
           <p class="project-description">
             <strong>Objective:</strong> implement a complete diffusion-based generative modeling stack from the ground up and quantify
-            how architectural and algorithmic choices improve quality–compute tradeoffs in sampling and training.
+            how architectural and algorithmic choices shift the quality–compute tradeoff in training and sampling.
           </p>
 
           <p class="skills-line">
-            <strong>Skills highlighted:</strong> PyTorch · DDPM/DDIM · Latent diffusion · Classifier-free guidance · Training stability (EMA/schedules) · Evaluation (FID/IS)
+            <strong>Skills highlighted:</strong> PyTorch · DDPM/DDIM · Latent diffusion · Classifier-free guidance · EMA/schedules · Evaluation (FID/IS)
           </p>
 
           <details>
@@ -750,40 +768,38 @@
             <div class="details-inner">
               <h4>Introduction</h4>
               <p>
-                Diffusion models produce high-quality samples but can be computationally intensive, especially in pixel space. This project
-                targets practical efficiency improvements while preserving fidelity.
+                Diffusion models are stable and high-quality, but can be expensive in pixel space. This project targets practical efficiency
+                improvements while preserving fidelity.
               </p>
 
               <h4>Methods</h4>
               <p>
-                Implemented a baseline DDPM and expanded the framework to support accelerated deterministic sampling (DDIM), latent diffusion
-                with a VAE, and classifier-free guidance for conditional generation. Added stability/quality strategies such as EMA, improved
-                scheduling, and increased U-Net capacity.
+                Built baseline DDPM; added DDIM for faster deterministic sampling; implemented latent diffusion with a VAE; implemented
+                classifier-free guidance; used advanced training strategies (EMA, improved noise scheduling) and an enhanced U-Net.
               </p>
 
               <h4>Results</h4>
               <p>
-                Compared variants using standard generative metrics and demonstrated that combining latent-space operation with guidance and
-                training improvements yields substantial quality gains over baseline configurations.
+                Demonstrated compounding gains from latent-space operation and conditioning/scheduling improvements, achieving major FID
+                reductions relative to baseline configurations.
               </p>
 
               <h4>Discussion</h4>
               <p>
-                Clarifies the “design space” of diffusion systems: where compute is spent (pixel vs latent), how sampling is accelerated (DDIM),
-                and how conditioning/scheduling choices shift the fidelity–speed frontier.
+                Clarifies where compute is spent (pixel vs latent), how sampling is accelerated (DDIM), and how conditioning/scheduling choices
+                move the fidelity–speed frontier.
               </p>
 
               <h4>Role</h4>
               <p>
-                Implemented core diffusion components and training loop; contributed experimentation and analysis, and documented the framework
-                in a formal report.
+                Implemented core diffusion components and training loop; supported experimentation and analysis; documented the framework in a formal report.
               </p>
             </div>
           </details>
         </div>
       </article>
 
-      <!-- Optional / Additional project (kept, but clearly not part of the 4) -->
+      <!-- Additional project (optional) -->
       <article class="card project-card" aria-label="Additional project">
         <div class="top">
           <div class="project-kicker">Additional · Computer Vision</div>
@@ -800,8 +816,7 @@
           </figure>
 
           <p class="project-description">
-            <strong>Objective:</strong> automate player/ball perception to support faster annotation and richer broadcast overlays in
-            sports analytics workflows.
+            <strong>Objective:</strong> automate player/ball perception to support faster annotation and richer broadcast overlays in sports analytics workflows.
           </p>
 
           <p class="skills-line">
@@ -843,23 +858,6 @@
     </div>
   </section>
 
-  <!-- RESUME -->
-  <section id="resume" aria-label="Resume section">
-    <h2>Resume</h2>
-    <p class="section-intro">
-      Download the one-page resume PDF. (The “Resume Snapshot” and headings appear at the top of the page for skimmers.)
-    </p>
-
-    <div class="card resume-box" style="margin-top:1rem;">
-      <div class="card-inner">
-        <p style="margin:.1rem 0 .75rem; color:var(--muted);">
-          Prefer a quick skim? Start with the Resume Snapshot in the right-hand panel at the top of this page.
-        </p>
-        <a class="btn btn-primary" href="Resume_TJ.pdf" target="_blank" rel="noopener">Open resume (PDF)</a>
-      </div>
-    </div>
-  </section>
-
   <footer>
     <p style="margin:0;">© <span id="year"></span> Tej Jolly</p>
   </footer>
@@ -878,7 +876,6 @@
   const byId = new Map(links.map(a => [a.getAttribute("href"), a]));
 
   const observer = new IntersectionObserver((entries) => {
-    // Pick the most visible intersecting section
     const visible = entries
       .filter(e => e.isIntersecting)
       .sort((a,b) => b.intersectionRatio - a.intersectionRatio)[0];
@@ -895,6 +892,25 @@
   });
 
   sections.forEach(sec => observer.observe(sec));
+
+  // Match Resume Snapshot card height to the About card (desktop only)
+  function matchSnapshotHeight() {
+    const about = document.getElementById("about");
+    const resume = document.getElementById("resumeInner");
+    if (!about || !resume) return;
+
+    if (window.matchMedia("(max-width: 920px)").matches) {
+      resume.style.maxHeight = "none";
+      return;
+    }
+
+    // slight padding to prevent touching the card edge visually
+    const target = Math.max(280, about.getBoundingClientRect().height);
+    resume.style.maxHeight = `${Math.floor(target)}px`;
+  }
+
+  window.addEventListener("load", matchSnapshotHeight);
+  window.addEventListener("resize", matchSnapshotHeight);
 </script>
 
 </body>

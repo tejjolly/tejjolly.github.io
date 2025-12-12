@@ -762,7 +762,7 @@
         </div>
       </article>
 
-      <article class="card project-card" aria-label="Additional project">
+      <article class="card project-card">
         <div class="top">
           <div class="project-kicker">Additional · Computer Vision</div>
           <h3>PlayerVision: Real-Time Player &amp; Ball Tracking for Sports</h3>
@@ -780,9 +780,9 @@
         <div class="asset-links" aria-label="Project links">
           <a href="videos/processed_video.mov" target="_blank" rel="noopener">Video</a>
         </div>
-        
+
           <p class="project-description">
-            <strong>Objective:</strong> automate player/ball perception to support faster annotation and richer broadcast overlays in sports analytics workflows.
+            <strong>Objective:</strong> design and implement a real-time computer vision pipeline that integrates custom object detection, identity-preserving multi-object tracking, and appearance-based team assignment to enable robust spatial reasoning from broadcast sports video. The system emphasizes methodological reliability under occlusion and motion by coupling YOLO-based detection with Kalman-filtered tracking and embedding-aware data association, and extends beyond detection to support downstream analytics such as possession inference, proximity analysis, and dynamic player highlighting in real time.
           </p>
 
           <p class="skills-line">
@@ -794,32 +794,97 @@
             <div class="details-inner">
               <h4>Introduction</h4>
               <p>
-                Manual tagging remains a bottleneck in sports analytics and production. Robust perception pipelines can reduce workload and enable new viewer experiences.
+                Manual tagging and post hoc analysis limit the scalability and immediacy of sports analytics. Reliable real-time perception requires maintaining player identity, team context, and spatial relationships under camera motion, occlusion, and appearance variation.
               </p>
 
               <h4>Methods</h4>
               <p>
-                Built a pipeline for detection + tracking, with color-based team assignment and proximity-based ball-carrier highlighting.
+                Implemented an end-to-end vision pipeline combining custom-trained object detection with identity-preserving multi-object tracking, appearance-based team assignment, and proximity-driven spatial logic. Integrated color-based jersey analysis and distance metrics to infer ball possession and nearest-opponent relationships in real time.
               </p>
 
               <h4>Results</h4>
               <p>
-                Produced a working prototype with persistent tracks and team labels suitable for iterative improvement and evaluation.
+                Demonstrated a functioning real-time prototype with persistent player tracks, team labels, and contextual overlays, enabling stable downstream analytics across extended video sequences.
               </p>
 
               <h4>Discussion</h4>
               <p>
-                Highlights practical challenges: camera motion, occlusions, and appearance changes; suggests directions for robustness improvements.
+                Results illustrate that perception accuracy depends as much on identity persistence and appearance handling as on raw detection performance. Camera motion, partial occlusions, and jersey variability emerge as dominant failure modes, motivating future robustness improvements in appearance modeling and data association.
               </p>
 
               <h4>Role</h4>
               <p>
-                Implemented preprocessing and team-color clustering module; integrated visualization and proximity analytics.
+                Designed and implemented preprocessing and team-color clustering modules; integrated tracking outputs with visualization and proximity analytics; contributed to system-level integration and evaluation.
               </p>
             </div>
           </details>
         </div>
       </article>
+      <article class="card project-card">
+        <div class="top">
+          <div class="project-kicker">Presentation · Numerical Methods</div>
+          <h3>Presentation on Numerical Diffusion in CFD</h3>
+          <p class="project-meta">Computational Fluid Dynamics · December 2024</p>
+        </div>
+
+        <div class="project-body">
+          <figure>
+            <img src="numerical_diffusion.png" alt="Illustration of numerical diffusion smearing sharp scalar gradients in CFD" />
+            <figcaption>
+              Canonical advection problems and applied CFD examples showing how discretization alone can introduce artificial diffusion and distort physical interpretation.
+            </figcaption>
+          </figure>
+
+          <div class="asset-links" aria-label="Presentation links">
+            <a href="presentation_numerical_diffusion.mp4"
+              target="_blank" rel="noopener">Presentation Video</a>
+            <a href="3-min-pres_v2.pdf" target="_blank" rel="noopener">Slides (PDF)</a>
+          </div>
+
+          <p class="project-description">
+            <strong>Objective:</strong> demonstrate how numerical diffusion arises from spatial and temporal discretization in advection-dominated flows, and show how solver order, grid resolution, and mesh topology can qualitatively change predicted transport, peak values, and mixing in CFD simulations.
+          </p>
+
+          <p class="skills-line">
+            <strong>Skills highlighted:</strong> Numerical methods · Advection schemes · Mesh sensitivity · CFD interpretation · Scientific communication
+          </p>
+
+          <details>
+            <summary>Details ↓ <span aria-hidden="true">▾</span></summary>
+            <div class="details-inner">
+              <h4>Introduction</h4>
+              <p>
+                Sharp scalar structures—such as temperature fronts, plumes, and shear layers—should advect without distortion in the absence of physical diffusion.
+                In practice, replacing continuous operators with discrete approximations introduces artificial smoothing that can fundamentally alter CFD predictions.
+              </p>
+
+              <h4>Methods</h4>
+              <p>
+                Presented a sequence of increasingly realistic examples: idealized 2D cone advection, 1D pulse transport, and a 3D temperature front advected
+                through a building-scale domain. Systematically varied mesh resolution, cell type, and discretization scheme to isolate numerical diffusion effects.
+              </p>
+
+              <h4>Results</h4>
+              <p>
+                Showed that low-order schemes and coarse or irregular meshes smear sharp features, reduce extrema, and create artificial mixing bands—even when
+                physical diffusion is absent. Demonstrated that changing discretization alone can shift peak temperatures and predicted loads by large margins.
+              </p>
+
+              <h4>Discussion</h4>
+              <p>
+                Highlights numerical diffusion as a modeling parameter rather than a benign artifact. Emphasizes the need for mesh- and scheme-aware interpretation
+                when CFD outputs are used for design, safety, or policy decisions.
+              </p>
+
+              <h4>Role</h4>
+              <p>
+                Designed the examples, generated simulation results, and developed the presentation narrative linking numerical analysis concepts to applied CFD outcomes.
+              </p>
+            </div>
+          </details>
+        </div>
+      </article>
+
     </div>
   </section>
 </main>

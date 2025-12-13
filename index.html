@@ -700,7 +700,67 @@
 
       <article class="card project-card">
         <div class="top">
-          <div class="project-kicker">Project 4 · Deep Learning</div>
+          <div class="project-kicker">Project 4 · Computer Vision</div>
+          <h3>PlayerVision: Real-Time Player &amp; Ball Tracking for Sports</h3>
+          <p class="project-meta">Computer Vision for Engineers · Fall 2024</p>
+        </div>
+
+        <div class="project-body">
+          <figure>
+            <img src="playervis_image.png" alt="Tracking overlay for players and ball in soccer footage" />
+            <figcaption>
+              Real-time perception pipeline: detection, tracking, team assignment, and proximity analytics for broadcast augmentation.
+            </figcaption>
+          </figure>
+
+        <div class="asset-links" aria-label="Project links">
+          <a href="videos/processed_video.mov" target="_blank" rel="noopener">Video</a>
+        </div>
+
+          <p class="project-description">
+            <strong>Objective:</strong> design and implement a real-time computer vision pipeline that integrates custom object detection, identity-preserving multi-object tracking, and appearance-based team assignment to enable robust spatial reasoning from broadcast sports video. The system emphasizes methodological reliability under occlusion and motion by coupling YOLO-based detection with Kalman-filtered tracking and embedding-aware data association, and extends beyond detection to support downstream analytics such as possession inference, proximity analysis, and dynamic player highlighting in real time.
+          </p>
+
+          <p class="skills-line">
+            <strong>Skills highlighted:</strong> OpenCV · Detection/tracking · Feature engineering · Real-time visualization
+          </p>
+
+          <details>
+            <summary>Details ↓ <span aria-hidden="true">▾</span></summary>
+            <div class="details-inner">
+              <h4>Introduction</h4>
+              <p>
+                Manual tagging and post hoc analysis limit the scalability and immediacy of sports analytics. Reliable real-time perception requires maintaining player identity, team context, and spatial relationships under camera motion, occlusion, and appearance variation.
+              </p>
+
+              <h4>Methods</h4>
+              <p>
+                Implemented an end-to-end vision pipeline combining custom-trained object detection with identity-preserving multi-object tracking, appearance-based team assignment, and proximity-driven spatial logic. Integrated color-based jersey analysis and distance metrics to infer ball possession and nearest-opponent relationships in real time.
+              </p>
+
+              <h4>Results</h4>
+              <p>
+                Demonstrated a functioning real-time prototype with persistent player tracks, team labels, and contextual overlays, enabling stable downstream analytics across extended video sequences.
+              </p>
+
+              <h4>Discussion</h4>
+              <p>
+                Results illustrate that perception accuracy depends as much on identity persistence and appearance handling as on raw detection performance. Camera motion, partial occlusions, and jersey variability emerge as dominant failure modes, motivating future robustness improvements in appearance modeling and data association.
+              </p>
+
+              <h4>Role</h4>
+              <p>
+                Designed and implemented preprocessing and team-color clustering modules; integrated tracking outputs with visualization and proximity analytics; contributed to system-level integration and evaluation.
+              </p>
+            </div>
+          </details>
+        </div>
+      </article>
+
+
+      <article class="card project-card">
+        <div class="top">
+          <div class="project-kicker">Deep Learning</div>
           <h3>Modular Diffusion Model Framework for Image Synthesis (Built From Scratch)</h3>
           <p class="project-meta">Deep Learning · Fall 2024</p>
         </div>
@@ -762,64 +822,6 @@
         </div>
       </article>
 
-      <article class="card project-card">
-        <div class="top">
-          <div class="project-kicker">Additional · Computer Vision</div>
-          <h3>PlayerVision: Real-Time Player &amp; Ball Tracking for Sports</h3>
-          <p class="project-meta">Computer Vision for Engineers · Fall 2024</p>
-        </div>
-
-        <div class="project-body">
-          <figure>
-            <img src="playervis_image.png" alt="Tracking overlay for players and ball in soccer footage" />
-            <figcaption>
-              Real-time perception pipeline: detection, tracking, team assignment, and proximity analytics for broadcast augmentation.
-            </figcaption>
-          </figure>
-
-        <div class="asset-links" aria-label="Project links">
-          <a href="videos/processed_video.mov" target="_blank" rel="noopener">Video</a>
-        </div>
-
-          <p class="project-description">
-            <strong>Objective:</strong> design and implement a real-time computer vision pipeline that integrates custom object detection, identity-preserving multi-object tracking, and appearance-based team assignment to enable robust spatial reasoning from broadcast sports video. The system emphasizes methodological reliability under occlusion and motion by coupling YOLO-based detection with Kalman-filtered tracking and embedding-aware data association, and extends beyond detection to support downstream analytics such as possession inference, proximity analysis, and dynamic player highlighting in real time.
-          </p>
-
-          <p class="skills-line">
-            <strong>Skills highlighted:</strong> OpenCV · Detection/tracking · Feature engineering · Real-time visualization
-          </p>
-
-          <details>
-            <summary>Details ↓ <span aria-hidden="true">▾</span></summary>
-            <div class="details-inner">
-              <h4>Introduction</h4>
-              <p>
-                Manual tagging and post hoc analysis limit the scalability and immediacy of sports analytics. Reliable real-time perception requires maintaining player identity, team context, and spatial relationships under camera motion, occlusion, and appearance variation.
-              </p>
-
-              <h4>Methods</h4>
-              <p>
-                Implemented an end-to-end vision pipeline combining custom-trained object detection with identity-preserving multi-object tracking, appearance-based team assignment, and proximity-driven spatial logic. Integrated color-based jersey analysis and distance metrics to infer ball possession and nearest-opponent relationships in real time.
-              </p>
-
-              <h4>Results</h4>
-              <p>
-                Demonstrated a functioning real-time prototype with persistent player tracks, team labels, and contextual overlays, enabling stable downstream analytics across extended video sequences.
-              </p>
-
-              <h4>Discussion</h4>
-              <p>
-                Results illustrate that perception accuracy depends as much on identity persistence and appearance handling as on raw detection performance. Camera motion, partial occlusions, and jersey variability emerge as dominant failure modes, motivating future robustness improvements in appearance modeling and data association.
-              </p>
-
-              <h4>Role</h4>
-              <p>
-                Designed and implemented preprocessing and team-color clustering modules; integrated tracking outputs with visualization and proximity analytics; contributed to system-level integration and evaluation.
-              </p>
-            </div>
-          </details>
-        </div>
-      </article>
       <article class="card project-card">
         <div class="top">
           <div class="project-kicker">Presentation · Numerical Methods</div>
